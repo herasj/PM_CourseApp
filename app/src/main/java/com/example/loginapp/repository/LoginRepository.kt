@@ -11,6 +11,9 @@ object LoginRepository {
     var stateUsername : String = "N/A"
     var password = MutableLiveData<String>()
     var statePassword : String = "N/A"
+    //Token
+    var token = MutableLiveData<String>()
+    var stateToken : String = "N/A"
     init {
         stateLogged = PreferenceProvider.getValue()!!
         logged.value = stateLogged;
@@ -18,6 +21,8 @@ object LoginRepository {
         username.value = stateUsername
         statePassword = PreferenceProvider.getPassword()!!
         password.value = statePassword
+        stateToken = PreferenceProvider.getToken()!!
+        token.value = stateToken
     }
 
     fun getLogged() = logged as LiveData<Boolean>
@@ -37,5 +42,12 @@ object LoginRepository {
         statePassword = newPass
         password.value = statePassword;
         PreferenceProvider.setCredentials(newUser, newPass)
+    }
+
+    fun getToken() = token as LiveData<String>
+    fun setToken(newToken: String){
+        stateToken = newToken
+        token.value = stateToken;
+        PreferenceProvider.setToken(newToken)
     }
 }

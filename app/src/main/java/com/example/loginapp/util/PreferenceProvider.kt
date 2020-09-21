@@ -18,6 +18,14 @@ class PreferenceProvider {
             return preference.getBoolean("logged", false)
         }
 
+        fun getToken(): String? {
+            return preference.getString("token", "")
+        }
+
+        fun setToken(token: String) {
+            preference.edit().putString("token", token).apply()
+        }
+
         fun setCredentials(username: String, password: String) {
             preference.edit().putString("username", username).apply()
             preference.edit().putString("password", password).apply()
