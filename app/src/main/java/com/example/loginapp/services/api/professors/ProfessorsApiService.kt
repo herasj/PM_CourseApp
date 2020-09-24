@@ -6,18 +6,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfessorsApiService {
-    private val postsApi = Retrofit.Builder()
+    private val proApi = Retrofit.Builder()
         .baseUrl("https://movil-api.herokuapp.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(ProfessorApi::class.java)
 
     suspend fun getProfessors(dbId: String, token: String): List<Professor> {
-        return postsApi.getProfessors(dbId, token)
+        return proApi.getProfessors(dbId, token)
     }
 
     suspend fun getProfessorInfo(dbId: String, professorId: String, token: String): DetailProfessor {
-        return postsApi.getProfessorInfo(dbId, professorId, token)
+        return proApi.getProfessorInfo(dbId, professorId, token)
     }
 
 }
