@@ -77,30 +77,4 @@ class StudentViewModel : ViewModel() {
             studentDetail = studentInfo
         }
     }
-
-    fun createStudent() {
-        viewModelScope.launch {
-            val response = authrepository.refreshToken(loginrepository.getToken().value!!)
-            Log.d("VM_Token", "$response")
-            if (response.valid == false) {
-                Log.i("Status", "Is Not Valid")
-                val email = loginrepository.getEmail().value!!
-                val pass = loginrepository.getPassword().value!!
-                Log.d("PreferenceEmail", "${loginrepository.getEmail().value}")
-                Log.d("PreferencePass", "${loginrepository.getPassword().value}")
-                val newResponse: AuthResponse = authrepository.signin(Login(email, pass))
-                Log.d("VM_Token", "$newResponse")
-                loginrepository.setToken("Bearer ${newResponse.token}")
-                Log.d("PreferenceToken", "${loginrepository.getToken().value}")
-            } else {
-                Log.i("Status", "IsValid")
-            }
-            val newStudent = repository.createStudent(
-                loginrepository.getUsername().value!!,
-                loginrepository.getToken().value!!
-            )
-            //students.add(newStudent)
-            //studentsLiveData.postValue(newStudent)
-        }
-    }
 }

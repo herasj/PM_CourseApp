@@ -15,8 +15,8 @@ class StudentsApiService {
         return studentApi.getStudents(dbId, token)
     }
 
-    suspend fun createStudent(dbId: String, token: String) {
-        return studentApi.createStudent(dbId, token)
+    suspend fun createStudent(dbId: String, token: String, courseId: String) {
+        return studentApi.createStudent(dbId, token, courseId)
     }
 
     suspend fun getStudentInfo(dbId: String, studentId: String, token: String): StudentDetails {
