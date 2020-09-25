@@ -24,9 +24,7 @@ class CourseViewModel: ViewModel() {
     fun getCourses() {
         viewModelScope.launch {
             try{
-                Log.d("Mkya", "Mkyaaa")
                 authrepository.refreshToken()
-                Log.d("grave", "gravelavuelta")
                 courses.addAll(repository.getCourses())
                 coursesLiveData.postValue(courses)
             }catch (error: Error){

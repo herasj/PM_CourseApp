@@ -1,5 +1,6 @@
 package com.example.loginapp.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.loginapp.util.PreferenceProvider
@@ -53,13 +54,14 @@ object LoginRepository {
     fun setToken(newToken: String){
         stateToken = newToken
         token.value = stateToken;
-        PreferenceProvider.setToken(newToken)
+        Log.d("SetToken", stateToken)
+        PreferenceProvider.setToken("Bearer ${newToken}")
     }
 
     fun getEmail() = email as LiveData<String>
     fun setEmail(newEmail: String){
         stateEmail = newEmail
         email.value = stateEmail;
-        PreferenceProvider.setToken(newEmail)
+        PreferenceProvider.setEmail(newEmail)
     }
 }

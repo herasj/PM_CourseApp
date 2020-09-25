@@ -21,27 +21,28 @@ class LoginViewModel : ViewModel() {
         loginRepository.setLogged(state)
     }
 
-    fun login(email: String, pass: String){
+    fun login(email: String, pass: String) {
         viewModelScope.launch {
             val newLogin = Login(email, pass)
             Log.d("data", "$newLogin")
             val response = authRepository.signin(newLogin)
             Log.d("Login", "$response")
             loginRepository.setEmail(email)
-            loginRepository.setToken("Bearer ${response.token}")
+//            loginRepository.setToken("Bearer ${response.token}")
         }
     }
 
     fun setCredentials(newUser: String, newPass: String, email: String, name: String) {
+        val newAuth = Auth(email, newPass, newUser, name)
+
         viewModelScope.launch {
-            val newAuth = Auth(email, newPass, newUser, name)
+
             Log.d("data", "$newAuth")
-            val response = authRepository.signup(newAuth)
+            val response = authRepository.signup(newAuth);
             Log.d("Register", "$response")
-            loginRepository.setCredentials(newUser, newPass)
-            loginRepository.setEmail(email)
-            loginRepository.setToken("Bearer ${response.token}")
+
         }
+        loginRepository.setEmail(email)
 
     }
 }
