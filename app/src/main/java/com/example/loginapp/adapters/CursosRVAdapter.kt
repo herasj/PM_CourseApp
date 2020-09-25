@@ -10,7 +10,7 @@ import com.example.loginapp.model.course.Course
 import kotlinx.android.synthetic.main.curso_item.*
 import kotlinx.android.synthetic.main.curso_item.view.*
 
-class CursosRVAdapter (private val cursos: List<Course>) : RecyclerView.Adapter<CursosRVAdapter.ViewHolder>() {
+class CursosRVAdapter (private val cursos: List<Course>, private val navigate : (cursoId: Int) -> Unit ) : RecyclerView.Adapter<CursosRVAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CursosRVAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.curso_item, parent, false)
         return ViewHolder(view)
@@ -21,7 +21,10 @@ class CursosRVAdapter (private val cursos: List<Course>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: CursosRVAdapter.ViewHolder, position: Int) {
         val item = cursos[position]
         holder.name.text = item.name
-}
+        holder.btn.setOnClickListener {
+            navigate(item.id)
+        }
+    }
 
     inner class ViewHolder (val cView : View) : RecyclerView.ViewHolder(cView){
         val btn : Button = cView.detailButton

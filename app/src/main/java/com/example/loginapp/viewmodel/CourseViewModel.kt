@@ -23,6 +23,7 @@ class CourseViewModel: ViewModel() {
     val courses = mutableListOf<Course>()
     val coursesLiveData = MutableLiveData<List<Course>>()
     var courseDetail: CourseDetail = CourseDetail()
+    val courseDetailLiveData = MutableLiveData<CourseDetail>()
     init {
         getCourses()
     }
@@ -71,6 +72,7 @@ class CourseViewModel: ViewModel() {
             val courseInfo = repository.getCourseInfo(loginrepository.getUsername().value!!,loginrepository.getToken().value!!,courseId)
             Log.i("Course", "$courseInfo")
             courseDetail = courseInfo
+            courseDetailLiveData.postValue(courseInfo)
         }
     }
 

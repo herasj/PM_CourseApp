@@ -20,6 +20,7 @@ class StudentViewModel : ViewModel() {
     private val students = mutableListOf<Student>()
     val studentsLiveData = MutableLiveData<List<Student>>()
     var studentDetail: StudentDetails = StudentDetails()
+    val studentDetailLiveData = MutableLiveData<StudentDetails>()
 
     init {
         getStudent()
@@ -75,6 +76,7 @@ class StudentViewModel : ViewModel() {
                 loginrepository.getToken().value!!
             )
             studentDetail = studentInfo
+            studentDetailLiveData.postValue(studentInfo)
         }
     }
 }

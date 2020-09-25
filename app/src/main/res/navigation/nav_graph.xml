@@ -25,7 +25,47 @@
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/cursosLista"
-        android:name="com.example.loginapp.ui.CursosLista"
+        android:name="com.example.loginapp.ui.CursosListaFragment"
         android:label="fragment_cursos_lista"
-        tools:layout="@layout/fragment_cursos_lista" />
+        tools:layout="@layout/fragment_cursos_lista" >
+        <action
+            android:id="@+id/action_cursosLista_to_cursosFragment"
+            app:destination="@id/cursosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cursosFragment"
+        android:name="com.example.loginapp.ui.CursosFragment"
+        android:label="fragment_cursos"
+        tools:layout="@layout/fragment_cursos" >
+        <argument
+            android:name="cursoId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_cursosFragment_to_studentFragment"
+            app:destination="@id/studentFragment" />
+        <action
+            android:id="@+id/action_cursosFragment_to_professorFragment"
+            app:destination="@id/professorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentFragment"
+        android:name="com.example.loginapp.ui.StudentFragment"
+        android:label="fragment_student"
+        tools:layout="@layout/fragment_student" >
+        <argument
+            android:name="studentId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/professorFragment"
+        android:name="com.example.loginapp.ui.ProfessorFragment"
+        android:label="fragment_professor"
+        tools:layout="@layout/fragment_professor" >
+        <argument
+            android:name="professorId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>
