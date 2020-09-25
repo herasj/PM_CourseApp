@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.loginapp.model.student.Student
 import com.example.loginapp.model.student.StudentDetails
 import com.example.loginapp.repository.AuthRepository
+import com.example.loginapp.repository.LoginRepository
 import com.example.loginapp.repository.StudentRepository
 import kotlinx.coroutines.launch
 
 class StudentViewModel: ViewModel() {
     private val authrepository = AuthRepository()
+    private val loginrepository = LoginRepository
     private val repository = StudentRepository()
     private val students = mutableListOf<Student>()
     val studentsLiveData = MutableLiveData<List<Student>>()
@@ -21,7 +23,7 @@ class StudentViewModel: ViewModel() {
 
     fun getStudent() {
         viewModelScope.launch {
-            authrepository.refreshToken()
+            authrepository.refreshToken(loginrepository.getToken().value!!)
             students.addAll(repository.getStudents())
             studentsLiveData.postValue(students)
         }
@@ -29,7 +31,7 @@ class StudentViewModel: ViewModel() {
 
     fun getStudentInfo(studentId: String) {
         viewModelScope.launch {
-            authrepository.refreshToken()
+            authrepository.refreshToken(loginrepository.getToken().value!!)
             val studentInfo = repository.getStudentInfo(studentId)
             studentDetail = studentInfo
         }

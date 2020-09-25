@@ -6,16 +6,11 @@ import com.example.loginapp.util.PreferenceProvider
 class CourseRepository {
 
     private val apiService = CourseApiService()
-    private val authRepo = LoginRepository
-    suspend fun getCourses() : List<Course> {
-        val user:String= authRepo.stateUsername;
-        val token: String = authRepo.stateToken;
-        Log.d("user", user)
-        Log.d("token", token)
-        return apiService.getCourses(user, token)
+    suspend fun getCourses(username: String, token: String) : List<Course> {
+        return apiService.getCourses(username, token)
     }
 
-    suspend fun getCourseInfo(courseId: String) = apiService.getCourseInfo(PreferenceProvider.getUsername()!!, courseId, PreferenceProvider.getToken()!!)
+    suspend fun getCourseInfo(username: String, token: String, courseId: String) = apiService.getCourseInfo(username, courseId,token)
 
-    suspend fun createCourse() = apiService.createCourse(PreferenceProvider.getUsername()!!, PreferenceProvider.getToken()!!)
+    suspend fun createCourse(username: String, token: String) = apiService.createCourse(username,token)
 }

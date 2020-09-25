@@ -27,7 +27,7 @@ class AuthApiService {
         return Retrofit.Builder()
             .baseUrl("https://movil-api.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
+            //.client(client)
             .build()
             .create(AuthApi::class.java)
 
@@ -39,33 +39,15 @@ class AuthApiService {
         .build()
         .create(AuthApi::class.java)
 
-    suspend fun signin(data: Login): MutableLiveData<AuthResponse> {
-        val functionResponse = MutableLiveData<AuthResponse>()
-        getRestEngine().signin(data.email, data.password).enqueue(object :
-            Callback<AuthResponse> {
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                if (response.isSuccessful) {
-                    Log.d("MyOut", "OK isSuccessful " + response.body())
-                    val loginResponse = response.body()
-                    if (loginResponse != null) {
-                        LoginRepository.setToken(loginResponse.token)
-                        Log.d("MyOut", "OK isSuccessful token " + loginResponse.token)
-                        functionResponse.value = loginResponse;
-                    }
-                } else {
-                    Log.d("MyOut", "NOK  " + response.code())
-                    Log.d("Err", response.errorBody().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.d("MyOut", "Failure " + t.message)
-            }
-        })
-        return functionResponse;
+    suspend fun signin(data: Login): AuthResponse {
+        return getRestEngine().signin(data.email, data.password)
     }
 
-    suspend fun signup(data: Auth): MutableLiveData<AuthResponse> {
+    suspend fun signup(data: Auth): AuthResponse {
+        return getRestEngine().signup(data.email, data.password, data.username, data.name)
+    }
+
+    /*suspend fun signup(data: Auth): MutableLiveData<AuthResponse> {
         val functionResponse = MutableLiveData<AuthResponse>()
         getRestEngine().signup(data.email, data.password, data.username, data.name).enqueue(object :
             Callback<AuthResponse> {
@@ -90,31 +72,10 @@ class AuthApiService {
             }
         })
             return functionResponse
-    }
+    }*/
 
-    suspend fun check(token: String): MutableLiveData<CheckToken>{
-        val functionResponse = MutableLiveData<CheckToken>()
-
-        getRestEngine().checkToken(token).enqueue(object :
-            Callback<CheckToken> {
-            override fun onResponse(call: Call<CheckToken>, response: Response<CheckToken>) {
-                if (response.isSuccessful) {
-                    Log.d("MyOut", "OK isSuccessful " + response.body())
-                    val checkResponse = response.body()
-                    if (checkResponse != null) {
-                        functionResponse.value = checkResponse;
-                    }
-                } else {
-                    Log.d("MyOut", "NOK  " + response.code())
-                    Log.d("Err", response.errorBody().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<CheckToken>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-        return functionResponse;
+    suspend fun check(token: String): CheckToken{
+        return getRestEngine().checkToken(token)
     }
 
 }

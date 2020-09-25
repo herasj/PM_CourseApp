@@ -16,17 +16,17 @@ interface AuthApi {
         @Field("password") pass: String,
         @Field("username") user: String,
         @Field("name") name: String
-    ): Call<AuthResponse>
+    ): AuthResponse
 
     @FormUrlEncoded
     @POST("signin")
     suspend fun signin(
         @Field("email") email: String,
         @Field("password") pass: String
-    ): Call<AuthResponse>
+    ): AuthResponse
 
     @POST("check/token")
-    suspend fun checkToken(@Header("Authorization") token: String): Call<CheckToken>
+    suspend fun checkToken(@Header("Authorization") token: String): CheckToken
 
 
 }

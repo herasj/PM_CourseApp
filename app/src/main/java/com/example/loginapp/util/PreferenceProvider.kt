@@ -35,8 +35,16 @@ class PreferenceProvider {
             return preference.getString("username", "N/A")
         }
 
+        fun setUsername(username: String) {
+            preference.edit().putString("username", username).apply()
+        }
+
         fun getPassword(): String? {
             return preference.getString("password", "N/A")
+        }
+
+        fun setPassword(password: String) {
+            preference.edit().putString("password", password).apply()
         }
 
         fun getEmail(): String? {

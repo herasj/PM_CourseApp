@@ -40,8 +40,20 @@ object LoginRepository {
     }
 
     fun getUsername() = username as LiveData<String>
+
+    fun setUsername(newUser: String){
+        stateUsername = newUser
+        username.value = stateUsername;
+        PreferenceProvider.setUsername(newUser)
+    }
+
     fun getPassword() = password as LiveData<String>
 
+    fun setPassword(newPass: String){
+        statePassword = newPass
+        password.value = statePassword;
+        PreferenceProvider.setPassword(newPass)
+    }
     fun setCredentials(newUser: String, newPass: String){
         stateUsername = newUser
         username.value = stateUsername;
