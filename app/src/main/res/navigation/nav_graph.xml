@@ -23,4 +23,9 @@
         android:name="com.example.loginapp.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/cursosLista"
+        android:name="com.example.loginapp.ui.CursosLista"
+        android:label="fragment_cursos_lista"
+        tools:layout="@layout/fragment_cursos_lista" />
 </navigation>

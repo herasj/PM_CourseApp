@@ -30,7 +30,7 @@ class RegisterFragment : Fragment() {
         val navController = findNavController()
         loginViewModel.getLogged().observe(viewLifecycleOwner, Observer { logged ->
             if (logged == true) {
-                navController.navigate(R.id.userFragment)
+                navController.navigate(R.id.cursosLista)
             }
         })
         view.findViewById<Button>(R.id.saveButton).setOnClickListener {

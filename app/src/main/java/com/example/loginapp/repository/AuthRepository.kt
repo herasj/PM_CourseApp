@@ -1,5 +1,6 @@
 package com.example.loginapp.repository
 
+import android.util.Log
 import com.example.loginapp.model.Auth
 import com.example.loginapp.model.Login
 import com.example.loginapp.services.api.auth.AuthApiService
@@ -13,6 +14,7 @@ class AuthRepository {
     suspend fun signup(data: Auth) = apiService.signup(data)
 
     suspend fun refreshToken() {
+        Log.d("Mkyax2", PreferenceProvider.getToken()!!)
         val response = apiService.check(PreferenceProvider.getToken()!!)
         if (!response.valid) {
             val newToken = this.signin(

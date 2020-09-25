@@ -32,18 +32,12 @@ class LoginFragment : Fragment() {
         val navController = findNavController()
         loginViewModel.getLogged().observe(viewLifecycleOwner, Observer { logged ->
             if (logged == true) {
-                navController.navigate(R.id.userFragment)
+                navController.navigate(R.id.cursosLista)
             }
         })
         view.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            val storedUsername = loginViewModel.getUsername();
-            val storedPassword = loginViewModel.getPassword();
-            if (storedUsername.value == usernameText.text.toString()  && storedPassword.value  == passwordText.text.toString() ) {
-                loginViewModel.setLogged(true)
-            } else {
-                Toast.makeText(view.context, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
-                Log.d("t","${usernameText.text.toString() } ${storedUsername.value} ${storedPassword.value} ${passwordText.text.toString()}")
-            }
+            loginViewModel.login(usernameText.text.toString(), passwordText.text.toString())
+            loginViewModel.setLogged(true)
         }
         view.findViewById<Button>(R.id.registerButton).setOnClickListener {
             navController.navigate(R.id.registerFragment)
