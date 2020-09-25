@@ -18,4 +18,6 @@ class AuthRepository {
 
     suspend fun refreshToken(token: String) = apiService.check(token)
 
+    suspend fun restartDatabase(username: String) = apiService.restart(username)
+
 }

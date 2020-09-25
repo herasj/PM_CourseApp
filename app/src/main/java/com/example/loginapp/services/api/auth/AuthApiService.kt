@@ -47,6 +47,11 @@ class AuthApiService {
         return getRestEngine().signup(data.email, data.password, data.username, data.name)
     }
 
+    suspend fun restart(username: String): Any {
+        return getRestEngine().restartDatabase(username)
+    }
+
+
     /*suspend fun signup(data: Auth): MutableLiveData<AuthResponse> {
         val functionResponse = MutableLiveData<AuthResponse>()
         getRestEngine().signup(data.email, data.password, data.username, data.name).enqueue(object :

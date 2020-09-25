@@ -28,5 +28,7 @@ interface AuthApi {
     @POST("check/token")
     suspend fun checkToken(@Header("Authorization") token: String): CheckToken
 
+    @GET("{dbId}/restart")
+    suspend fun restartDatabase(@Path("dbId") dbId: String): Any
 
 }

@@ -36,6 +36,14 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    fun restart() {
+        viewModelScope.launch {
+            val response = authRepository.restartDatabase(loginRepository.getUsername().value!!)
+            Log.d("Restart", "$response")
+//            loginRepository.setToken("Bearer ${response.token}")
+        }
+    }
+
     fun setCredentials(newUser: String, newPass: String, email: String, name: String) {
         val newAuth = Auth(email, newPass, newUser, name)
         loginRepository.setUsername(newUser)
