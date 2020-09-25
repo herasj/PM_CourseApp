@@ -7,8 +7,8 @@ class ProfessorRepository {
 
     private val apiService = ProfessorsApiService()
 
-    suspend fun getProfessors() = apiService.getProfessors(PreferenceProvider.getUsername()!!, PreferenceProvider.getToken()!!)
+    suspend fun getProfessors(username: String, token: String) = apiService.getProfessors(username,token)
 
-    suspend fun getProfessorInfo(professorId: String) = apiService.getProfessorInfo(PreferenceProvider.getUsername()!!, professorId , PreferenceProvider.getToken()!!)
+    suspend fun getProfessorInfo(username: String, professorId: String, token: String) = apiService.getProfessorInfo(username, professorId , token)
 
 }
