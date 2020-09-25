@@ -37,7 +37,9 @@ class RegisterFragment : Fragment() {
             if (editTextTextPassword.text.toString() == passwordRegisterText2.text.toString()) {
                 loginViewModel.setCredentials(
                     usernameRegisterText.text.toString(),
-                    editTextTextPassword.text.toString()
+                    editTextTextPassword.text.toString(),
+                    editTextTextEmailAddress.text.toString(),
+                    editTextTextPersonName.text.toString()
                 );
                 loginViewModel.setLogged(true)
             }else{

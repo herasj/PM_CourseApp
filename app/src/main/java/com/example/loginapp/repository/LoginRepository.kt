@@ -14,6 +14,9 @@ object LoginRepository {
     //Token
     var token = MutableLiveData<String>()
     var stateToken : String = "N/A"
+
+    var email = MutableLiveData<String>()
+    var stateEmail : String = "N/A"
     init {
         stateLogged = PreferenceProvider.getValue()!!
         logged.value = stateLogged;
@@ -23,6 +26,8 @@ object LoginRepository {
         password.value = statePassword
         stateToken = PreferenceProvider.getToken()!!
         token.value = stateToken
+        stateEmail = PreferenceProvider.getEmail()!!
+        email.value = stateEmail
     }
 
     fun getLogged() = logged as LiveData<Boolean>
@@ -49,5 +54,12 @@ object LoginRepository {
         stateToken = newToken
         token.value = stateToken;
         PreferenceProvider.setToken(newToken)
+    }
+
+    fun getEmail() = email as LiveData<String>
+    fun setEmail(newEmail: String){
+        stateEmail = newEmail
+        email.value = stateEmail;
+        PreferenceProvider.setToken(newEmail)
     }
 }

@@ -2,6 +2,7 @@ package com.example.loginapp.services.api.auth
 
 import com.example.loginapp.model.Auth
 import com.example.loginapp.model.AuthResponse
+import com.example.loginapp.model.CheckToken
 import com.example.loginapp.model.Login
 import com.example.loginapp.model.course.Course
 import com.example.loginapp.services.api.courses.CoursesApi
@@ -16,9 +17,13 @@ class AuthApiService {
         .create(AuthApi::class.java)
 
     suspend fun signin(data: Login): AuthResponse {
-        return authApi.signin(data)
+        return authApi.signin(data.email,data.password)
     }
     suspend fun signup(data: Auth): AuthResponse {
-        return authApi.signup(data)
+        return authApi.signup(data.email,data.password,data.username,data.name)
+    }
+
+    suspend fun check(token: String): CheckToken {
+        return authApi.checkToken(token)
     }
 }
